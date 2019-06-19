@@ -1,6 +1,7 @@
-//find out what is in the "add section"
+
 
 $(function() {
+    //add items to the list
     $('#js-shopping-list-form').submit(event => {
 
         //stop the default form submission  action
@@ -13,7 +14,7 @@ $(function() {
         $('input[name="shopping-list-entry"').val('');
 
         //append to the shopping list @ bottom
-        $('.shopping-list').append(`
+        $('ul.shopping-list').append(`
         <li>
             <span class="shopping-item">${newItem}</span>
                 <div class="shopping-item-controls">
@@ -27,5 +28,13 @@ $(function() {
         </li>`);
 
     })
-}
-);
+    //check off items
+    $('ul').on('click', '.shopping-item-toggle', function(event) {
+        $(this).closest('div').siblings('span.shopping-item').toggleClass('shopping-item__checked');
+    });
+
+    //delete created items
+    $('ul').on('click', '.shopping-item-delete', function(event) {
+        $(this).closest('li').remove();
+    });
+});
